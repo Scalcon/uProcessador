@@ -1,0 +1,35 @@
+-- PARA ENTREGAR URGENTE
+A. Carrega R3 (o registrador 3) com o valor 5
+B. Carrega R4 com 8
+C. Soma R3 com R4 e guarda em R5
+D. Subtrai 1 de R5
+E. Salta para o endereço 20
+F. Zera R5 (nunca será executada)
+G. No endereço 20, copia R5 para R3
+H. Salta para o passo C desta lista (R5 <= R3+R4)
+I. Zera R3 (nunca será executada)
+
+A:  0 - LD R3, 5            -- 00000101_011_1_1110
+B:  1 - LD R4, 8            -- 00001000_100_1_1110
+C:  2 - MV ACC, R3          -- 00000000_011_0_1010
+    3 - ADD ACC, R4         -- 000000000_100_0001
+    4 - MV R5, ACC          -- 00000000_101_1_1010
+D:  5 - SUBI R5, 1          -- 000000001_101_0100
+    6 - MV R5, ACC          -- 00000000_101_1_1010
+E:  7 - JMP 20              -- 00000_0010100_1111
+F:  8 - LD R5, 0            -- 00000000_101_1_1110
+    9 - NOP                 -- 000000000000_0000
+    10 - NOP                -- 000000000000_0000
+    11 - NOP                -- 000000000000_0000
+    12 - NOP                -- 000000000000_0000
+    13 - NOP                -- 000000000000_0000
+    14 - NOP                -- 000000000000_0000
+    15 - NOP                -- 000000000000_0000
+    16 - NOP                -- 000000000000_0000
+    17 - NOP                -- 000000000000_0000
+    18 - NOP                -- 000000000000_0000
+    19 - NOP                -- 000000000000_0000
+G:  20 - MV ACC, R5         -- 00000000_101_0_1010
+    21 - MV R3, ACC         -- 00000000_011_1_1010
+H:  22 - JMP 2              -- 00000_0000010_1111
+I:  23 - LD R3, 0           -- 00000000_011_1_1110

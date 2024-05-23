@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+
 entity maq_estados is
    port( clk,rst: in std_logic;
          estado: out unsigned(1 downto 0)

@@ -1,0 +1,34 @@
+v 4
+file . "MaquinaEstados.vhd" "55f22150a15c238d3d5a437b444a66e438b3562b" "20240523121628.372":
+  entity maquinaestados at 1( 0) + 0 on 91;
+  architecture a_maquinaestados of maquinaestados at 12( 200) + 0 on 92;
+file . "ula0.vhd" "6c5bbf3a9f95a22a7e24328f8dc736e4062c9ab8" "20240523121719.751":
+  entity ula0 at 2( 58) + 0 on 97;
+  architecture aula of ula0 at 16( 437) + 0 on 98;
+file . "reg16bits.vhd" "369e4eecad3a8b49c6d8a90ee008625aac0d0535" "20240523121644.594":
+  entity reg16bits at 1( 0) + 0 on 93;
+  architecture a_reg16bits of reg16bits at 12( 274) + 0 on 94;
+file . "PCcompleto.vhd" "3d58d8f33e151c052d31a0b6f2533eb79f136aad" "20240523121556.984":
+  entity pccompleto at 1( 0) + 0 on 87;
+  architecture a_pccompleto of pccompleto at 13( 313) + 0 on 88;
+file . "PC.vhd" "3cc1e2f8d6f71c7a47f52e4072e43eb0e46fee6d" "20240523121546.179":
+  entity pc at 1( 0) + 0 on 85;
+  architecture a_pc of pc at 15( 281) + 0 on 86;
+file . "ROM.vhd" "b3f81c17a2e5f46c0788eacd24a721d17e166506" "20240523121611.247":
+  entity rom at 1( 0) + 0 on 89;
+  architecture a_rom of rom at 12( 222) + 0 on 90;
+file . "ban_reg.vhd" "945dcf87b8a1bc5f1dd65a4b75aaea6497e926db" "20240523125623.795":
+  entity ban_reg at 1( 0) + 0 on 107;
+  architecture a_ban_reg of ban_reg at 13( 340) + 0 on 108;
+file . "bank_ula.vhd" "4312a466a8cd0c7e9ae4b7dd68027e7bbad80191" "20240523125637.629":
+  entity bank_ula at 1( 0) + 0 on 109;
+  architecture a_bank_ula of bank_ula at 16( 688) + 0 on 110;
+file . "CtrlUn.vhd" "815fdfc112f417b4e0f329cb65c8c8acdd48a750" "20240523121834.122":
+  entity ctrlun at 1( 0) + 0 on 101;
+  architecture a_ctrlun of ctrlun at 17( 445) + 1 on 102;
+file . "uprocessador.vhd" "821f345e4631a93b4711126c80490349a45287f4" "20240523125706.484":
+  entity uprocessador at 1( 0) + 0 on 111;
+  architecture a_uprocessador of uprocessador at 19( 411) + 0 on 112;
+file . "uprocessador_tb.vhd" "6fbdaac21f3c254481d65d62c84c18bdb6cd57ca" "20240523125717.092":
+  entity uprocessador_tb at 1( 0) + 0 on 113;
+  architecture a_uprocessador of uprocessador_tb at 8( 109) + 0 on 114;

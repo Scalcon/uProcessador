@@ -4,21 +4,21 @@ use ieee.numeric_std.all;
 
 entity PCcompleto is
     port(
-        clk, wrHab, rst, instPulo : in std_logic;
-        dadosEntrada               : in unsigned(6 downto 0);
-        dadosSaida                 : out unsigned(6 downto 0)
+        clk, wrEn, rst, jumpInst : in std_logic;
+        dataIn                   : in unsigned(6 downto 0);
+        dataOut                  : out unsigned(6 downto 0)
     );
 end entity PCcompleto;
 
 architecture a_PCcompleto of PCcompleto is
     
-    component ContadorPrograma is
+    component PC is
         port(
-            clk      : in std_logic;
-            wrHab    : in std_logic;
+            clk  	 : in std_logic;
+            wrEn 	 : in std_logic;
             rst      : in std_logic;
-            dadosEntrada  : in  unsigned(6 downto 0);
-            dadosSaida    : out unsigned(6 downto 0)
+            dataIn   : in  unsigned(6 downto 0);
+            dataOut  : out unsigned(6 downto 0)
         );
     end component;
     
@@ -27,10 +27,10 @@ architecture a_PCcompleto of PCcompleto is
 
 begin
     
-    CP0 : ContadorPrograma port map (clk, wrHab, rst, endProx, endAtual);
+    CP0 : PC port map (clk, wrEn, rst, endProx, endAtual);
     
     -- MUX de entrada, para o próximo endereço caso tenha instrução de pulo
-    endProx <= endAtual + "0000001" when instPulo = '0' else dadosEntrada;
-    dadosSaida <= endAtual;
+    endProx <= endAtual + "0000001" when jumpInst = '0' else dataIn;
+    dataOut <= endAtual;
     
 end a_PCcompleto;

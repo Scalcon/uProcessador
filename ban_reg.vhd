@@ -23,13 +23,13 @@ architecture a_ban_reg of ban_reg is
     signal mux : unsigned(6 downto 0);
 
 begin   
-    mux <= "0000001" when wrt = "001" else
-           "0000010" when wrt = "010" else
-           "0000100" when wrt = "011" else
-           "0001000" when wrt = "100" else
-           "0010000" when wrt = "101" else
-           "0100000" when wrt = "110" else
-           "1000000" when wrt = "111" else
+    mux <= "0000001" when (wrt = "001" and wr_en = '1' ) else
+           "0000010" when (wrt = "010" and wr_en = '1' ) else
+           "0000100" when (wrt = "011" and wr_en = '1' ) else
+           "0001000" when (wrt = "100" and wr_en = '1' ) else
+           "0010000" when (wrt = "101" and wr_en = '1' ) else
+           "0100000" when (wrt = "110" and wr_en = '1' ) else
+           "1000000" when (wrt = "111" and wr_en = '1' ) else
            "0000000";
 
     register1: reg16bits port map(clk => clk, rst => rst, wr_en => mux(0), data_in => data_in, data_out => reg1);

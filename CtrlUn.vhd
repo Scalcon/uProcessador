@@ -4,55 +4,126 @@ use ieee.numeric_std.all;
 
 entity CtrlUn is
 	port(
-		clk, rst : in std_logic
+		instruction : in unsigned(15 downto 0);
+        opUla 		: out unsigned(1 downto 0);
+        immGen		: out unsigned(15 downto 0);
+        regCode 	: out unsigned(2 downto 0);
+		jumpAdrs    : out unsigned(6 downto 0);
+		acc_wr_en, rb_wr_en, pc_jump_en, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src : out std_logic 
+
 	);
-	end entity CtrlUn;
+end entity;
 	
 	architecture a_CtrlUn of CtrlUn is
-	
-		component PCcomplete is 
-		port(
-			clk, wrEn, rst, jumpInst : in std_logic;
-			dataIn                   : in unsigned(6 downto 0);
-			dataOut                  : out unsigned(6 downto 0)
-		);
-		end component;
+						
+			-- opcode declarations
+			constant NOP 	  : unsigned(3 downto 0) := "0000";
+			constant ADD 	  : unsigned(3 downto 0) := "0001";
+			constant SUB 	  : unsigned(3 downto 0) := "0101";
+			constant SUBI 	  : unsigned(3 downto 0) := "0100";
+			constant CMP      : unsigned(3 downto 0) := "0111";
+			constant CMPI     : unsigned(3 downto 0) := "0110";
+			constant AND_OP   : unsigned(3 downto 0) := "1000";
+			constant XOR_OP   : unsigned(3 downto 0) := "1100";
+			constant MV 	  : unsigned(3 downto 0) := "1010";
+			constant LD 	  : unsigned(3 downto 0) := "1110";
+			constant JUMP 	  : unsigned(3 downto 0) := "1111";
+
+			-- signal declarations
+			signal s_opcode       : unsigned(3 downto 0) := "0000";
+			signal s_opUla 		: unsigned(1 downto 0) := "00";
+			signal s_immGen		: unsigned(15 downto 0) := "0000000000000000";
+			signal s_regCode   	: unsigned(2 downto 0) := "000";
+			signal s_jumpAdrs     : unsigned(6 downto 0) := "0000000";
+			signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_en, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src : std_logic := '0';
 		
-		component ROM is 
-		port(	
-			clk     : in std_logic;
-			address : in unsigned(6 downto 0);
-			output  : out unsigned(15 downto 0)
-		);
-		end component;
+	begin
+
+		-- extrai o opcode
+		s_opcode <= instruction(3 downto 0);
+
+		s_regcode <= instruction(6 downto 4) when s_opcode = ADD
+												or s_opcode = SUB
+												or s_opcode = CMP
+												or s_opcode = AND_OP
+												or s_opcode = XOR_OP
+											else
+					instruction(7 downto 5) when s_opcode = LD
+												or s_opcode = MV
+											else "000";
+
+
+		s_immGen <= ("0000000" & instruction(15 downto 7)) when s_opcode = SUBI
+												or s_opcode = CMPI
+											else
+					( "00000000" & instruction(15 downto 8)) when s_opcode = LD
+											else
+					( "000000000" & instruction(10 downto 4)) when s_opcode = JUMP
+											else "0000000000000000";
+
+					
+
+		-- ula ops
+		s_opUla <= "00" when s_opcode = ADD
+					else
+				 "01" when s_opcode = SUB
+						or s_opcode = SUBI
+						or s_opcode = CMP
+						or s_opcode = CMPI
+					else
+				"10" when s_opcode = AND_OP
+					else
+				"11" when s_opcode = XOR_OP
+					else "00";
+				
+		-- write enablers
+		s_acc_wr_en <= '1' when s_opcode = ADD
+							or s_opcode = SUB
+							or s_opcode = SUBI
+							or s_opcode = AND_OP
+							or s_opcode = XOR_OP
+							or (s_opcode = LD and instruction(4) = '0')
+							or (s_opcode = MV and instruction(4) = '0')
+						else '0';
 		
-		component Decoder is 
-		port(
-			instruction : in unsigned(15 downto 0);
-			jumpInst    : out std_logic;
-			jumpAdrs    : out unsigned(6 downto 0)
-		);
-		end component;
+		s_rb_wr_en <= '1' when (s_opcode = LD and instruction(4) = '1')
+							or (s_opcode = MV and instruction(4) = '1')
+						else '0';
+
+		s_pc_jump_en <= '1' when s_opcode = JUMP else '0';
+						
+		-- sources, 1 = constantes, 0 = registradores
+		s_ula_src <= '0' when s_opcode = ADD
+						or s_opcode = SUB
+						or s_opcode = CMP
+						or s_opcode = AND_OP
+						or s_opcode = XOR_OP
+					else '1';
 		
-		component StateMachine1Bit is
-		port(
-			clk   : in std_logic;
-			rst   : in std_logic;
-			state : out std_logic
-		);
-		end component;
+		s_rb_ld_src <= '1' when (s_opcode = LD and instruction(4) = '1')
+						else '0';
 		
-		signal WrEn, jumpInst, state : std_logic;
-		signal PCin, PCout           : unsigned(6 downto 0);
-		signal ROMOut                : unsigned(15 downto 0);
+		s_acc_ld_src <= '1' when (s_opcode = LD and instruction(4) = '0')
+							or (s_opcode = MV and instruction(4) = '0')
+						else '0';
 		
-		begin
+		s_acc_mv_ld_src <= '1' when (s_opcode = MV and instruction(4) = '0')
+						else '0';
 		
-		--components declaration
-		
-		PC0   : PCcomplete port map(clk, state, rst, jumpInst, PCin, PCout);
-		ROM0  : ROM port map(clk, PCout, ROMOut);
-		Dec0  : Decoder port map (ROMOut, jumpInst, PCin);
-		StMach: StateMachine1Bit port map(clk, rst, state);
+		-- jump no pc
+		s_jumpAdrs <= instruction(10 downto 4) when s_opcode = JUMP
+											else "0000000";
+
+		opUla <= s_opUla;
+		immGen <= s_immGen;
+		regCode <= s_regCode;
+		jumpAdrs <= s_jumpAdrs;
+		ula_src <= s_ula_src;
+		rb_ld_src <= s_rb_ld_src;
+		acc_ld_src <= s_acc_ld_src;
+		acc_mv_ld_src <= s_acc_mv_ld_src;
+		acc_wr_en <= s_acc_wr_en;
+		rb_wr_en <= s_rb_wr_en;
+		pc_jump_en <= s_pc_jump_en;
 		
 	end architecture a_CtrlUn;
