@@ -41,11 +41,18 @@ OpCodes:
 MV    - 1_1010
 MVACC - 0_1010
 
-Operações de Salto -> XXXXX_IIIIIII_CCCC
+Operação de Salto -> XXXXX_IIIIIII_CCCC
+Para branches condicionais para endereços anteriores, constante vale:
+Complemento_de_2(Endereço_atual - Endereço_destino)
 
 OpCodes:
 
 JMP   - 1111
+BEQ   - 1011
+BNE   - 0010
+BGE   - 1001
+BLT   - 1101
+
 
 Códigos dos Registradores:
 R0 - 000

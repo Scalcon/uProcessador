@@ -48,7 +48,7 @@ architecture a_uprocessador of uprocessador_tb is
 
     sim_time_process: process
     begin
-        wait for 10 us;
+        wait for 100 us;
         finished <= '1';
         wait;
     end process sim_time_process;

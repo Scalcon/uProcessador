@@ -4,12 +4,13 @@ use ieee.numeric_std.all;
 
 entity CtrlUn is
 	port(
-		instruction : in unsigned(15 downto 0);
-        opUla 		: out unsigned(1 downto 0);
-        immGen		: out unsigned(15 downto 0);
-        regCode 	: out unsigned(2 downto 0);
-		jumpAdrs    : out unsigned(6 downto 0);
-		acc_wr_en, rb_wr_en, pc_jump_en, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src : out std_logic 
+		instruction 			: in unsigned(15 downto 0);
+		ula_carry, ula_equals 	: in std_logic;
+        opUla 					: out unsigned(1 downto 0);
+        immGen					: out unsigned(15 downto 0);
+        regCode 				: out unsigned(2 downto 0);
+		jumpAdrs    			: out unsigned(6 downto 0);
+		acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src : out std_logic 
 
 	);
 end entity;
@@ -27,7 +28,11 @@ end entity;
 			constant XOR_OP   : unsigned(3 downto 0) := "1100";
 			constant MV 	  : unsigned(3 downto 0) := "1010";
 			constant LD 	  : unsigned(3 downto 0) := "1110";
-			constant JUMP 	  : unsigned(3 downto 0) := "1111";
+			constant BEQ      : unsigned(3 downto 0) := "1011";
+			constant BNE      : unsigned(3 downto 0) := "0010";
+			constant BGE      : unsigned(3 downto 0) := "1001";
+			constant BLT      : unsigned(3 downto 0) := "1101";
+ 			constant JUMP 	  : unsigned(3 downto 0) := "1111";
 
 			-- signal declarations
 			signal s_opcode       : unsigned(3 downto 0) := "0000";
@@ -35,7 +40,7 @@ end entity;
 			signal s_immGen		: unsigned(15 downto 0) := "0000000000000000";
 			signal s_regCode   	: unsigned(2 downto 0) := "000";
 			signal s_jumpAdrs     : unsigned(6 downto 0) := "0000000";
-			signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_en, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src : std_logic := '0';
+			signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, s_ula_carry, s_ula_equals : std_logic := '0';
 		
 	begin
 
@@ -59,6 +64,10 @@ end entity;
 					( "00000000" & instruction(15 downto 8)) when s_opcode = LD
 											else
 					( "000000000" & instruction(10 downto 4)) when s_opcode = JUMP
+																or s_opcode = BNE
+																or s_opcode = BEQ
+																or s_opcode = BGE
+																or s_opcode = BLT
 											else "0000000000000000";
 
 					
@@ -90,8 +99,16 @@ end entity;
 							or (s_opcode = MV and instruction(4) = '1')
 						else '0';
 
-		s_pc_jump_en <= '1' when s_opcode = JUMP else '0';
-						
+		s_pc_jump_abs <= '1' when s_opcode = JUMP
+							else '0';
+
+		s_pc_jump_rel <= '1' when (s_opcode = BNE and ula_equals = '0')
+								or (s_opcode = BEQ and ula_equals = '1')
+								or (s_opcode = BGE and ula_carry = '0')
+								or (s_opcode = BLT and ula_carry = '1')
+							else '0';
+
+							
 		-- sources, 1 = constantes, 0 = registradores
 		s_ula_src <= '0' when s_opcode = ADD
 						or s_opcode = SUB
@@ -112,7 +129,11 @@ end entity;
 		
 		-- jump no pc
 		s_jumpAdrs <= instruction(10 downto 4) when s_opcode = JUMP
-											else "0000000";
+												or (s_opcode = BNE and ula_equals = '0')
+												or (s_opcode = BEQ and ula_equals = '1')
+												or (s_opcode = BGE and ula_carry = '0' and ula_equals = '0')
+												or (s_opcode = BLT and ula_carry = '1')
+					else "0000000";
 
 		opUla <= s_opUla;
 		immGen <= s_immGen;
@@ -124,6 +145,7 @@ end entity;
 		acc_mv_ld_src <= s_acc_mv_ld_src;
 		acc_wr_en <= s_acc_wr_en;
 		rb_wr_en <= s_rb_wr_en;
-		pc_jump_en <= s_pc_jump_en;
+		pc_jump_abs <= s_pc_jump_abs;
+		pc_jump_rel <= s_pc_jump_rel;
 		
 	end architecture a_CtrlUn;

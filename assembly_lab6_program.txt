@@ -1,0 +1,19 @@
+A. Carrega R3 (o registrador 3) com o valor 0
+B. Carrega R4 com 0
+C. Soma R3 com R4 e guarda em R4
+D. Soma 1 em R3
+E. Se R3<30 salta para a instrução do passo C *
+F. Copia valor de R4 para R5
+
+A : 0 - LD R3, 0                    - 00000101_011_1_1110
+B : 1 - LD R4, 0                    - 00000000_100_1_1110
+C : 2 - MV ACC, R3                  - 00000000_011_0_1010
+    3 - ADD ACC, R4                 - 000000000_100_0001
+    4 - MV R4, ACC                  - 00000000_100_1_1010
+D : 5 - LD ACC, 1                   - 00000001_000_0_1110
+    6 - ADD ACC, R3                 - 000000000_011_0001
+    7 - MV R3, ACC                  - 00000000_011_1_1010
+E : 8 - SUBI R3, 30                 - 000011110_011_0100
+    9 - BLT 2                       - 00000_1111001_1101
+f : 10 - MV ACC, R4                 - 00000000_100_0_1010
+    11 - MV R5, ACC                 - 00000000_101_1_1010
