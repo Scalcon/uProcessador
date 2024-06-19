@@ -21,7 +21,6 @@ I - CONSTANTE
 
 OpCodes:
 
-CMPI  - 0110
 SUBI  - 0100
 
 Operações de carga de dados -> IIIIIIII_YYY_D_CCCC
@@ -52,6 +51,13 @@ BEQ   - 1011
 BNE   - 0010
 BGE   - 1001
 BLT   - 1101
+
+Operações na RAM -> XXXXXXXX_RRR_D_CCCC
+
+OpCodes:
+
+LW    - 1_0110
+SW    - 0_0110
 
 
 Códigos dos Registradores:

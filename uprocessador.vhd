@@ -38,7 +38,7 @@ architecture a_uprocessador of uprocessador is
 			immGen				  : out unsigned(15 downto 0);
 			regCode 			  : out unsigned(2 downto 0);
 			jumpAdrs    		  : out unsigned(6 downto 0);
-			acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src : out std_logic 
+			acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src, ram_wr_en, acc_ram_ld_src : out std_logic 
 		);
 	end component;
 	
@@ -73,13 +73,21 @@ architecture a_uprocessador of uprocessador is
 			data_out        : out std_logic
  		);
 	end component;
-	
+
+	component ram is
+		port ( clk, wr_en : in std_logic;
+			   address     : in unsigned(6 downto 0);
+			   data_in    : in unsigned(15 downto 0);
+			   data_out   : out unsigned(15 downto 0)
+ 		);	
+	end component;
+
 	signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, s_carry, s_equals : std_logic := '0'; 
-	signal s_wr_en, s_sm_rb_wr_en, s_sm_acc_wr_en, s_ff_carry, s_ff_uc_wr_en : std_logic := '0';
+	signal s_wr_en, s_sm_rb_wr_en, s_sm_acc_wr_en, s_ff_carry, s_ff_uc_wr_en, s_ram_wr_en, s_acc_ram_ld_src, s_sm_ram_wr_en : std_logic := '0';
 	signal s_ulaOp, s_state : unsigned(1 downto 0) := "00";
 	signal s_regCode	: unsigned(2 downto 0) := "000";
 	signal s_jumpAdrs, s_PCout : unsigned(6 downto 0) := "0000000";
-	signal s_ROMOut, s_acc_out, s_rb_out, s_ula_out, s_imm_gen, s_ula_in, s_ula_imm_in : unsigned(15 downto 0) := "0000000000000000";
+	signal s_ROMOut, s_acc_out, s_rb_out, s_ula_out, s_imm_gen, s_ula_in, s_ula_imm_in, s_ram_out : unsigned(15 downto 0) := "0000000000000000";
 	
 	begin
 		
@@ -120,7 +128,9 @@ architecture a_uprocessador of uprocessador is
 			ula_src => s_ula_src,
 			rb_ld_src => s_rb_ld_src,
 			acc_ld_src => s_acc_ld_src,
-			acc_mv_ld_src => s_acc_mv_ld_src
+			acc_mv_ld_src => s_acc_mv_ld_src,
+			ram_wr_en => s_ram_wr_en,
+			acc_ram_ld_src => s_acc_ram_ld_src
 		);
 		
 		BUla : bank_ula port map (
@@ -142,6 +152,7 @@ architecture a_uprocessador of uprocessador is
 		);
 
 		UCff : flipflop port map (
+			--TODO: flipflop recebe equals 
 			clk => clk,
 			rst => rst,
 			wr_en => s_ff_uc_wr_en,
@@ -149,15 +160,25 @@ architecture a_uprocessador of uprocessador is
 			data_out => s_ff_carry
 		);
 
+		RAM0 : ram port map (
+			clk => clk,
+			wr_en => s_sm_ram_wr_en,
+			address => s_rb_out(6 downto 0),
+			data_in => s_acc_out,
+			data_out => s_ram_out
+		);
+
 		--write enablers com maquina de estados
 		s_wr_en <= '1' when s_state = "10" else '0';
+		s_sm_ram_wr_en <= s_ram_wr_en when s_state = "01" else '0';
 		s_sm_rb_wr_en <= s_rb_wr_en when s_state = "01" else '0';
 		s_sm_acc_wr_en <= s_acc_wr_en when s_state = "01" else '0';
 		s_ff_uc_wr_en <= '1' when s_state = "01" else '0';
 
 		
 		s_ula_imm_in <= s_rb_out when s_acc_mv_ld_src = '1' else
-			s_imm_gen; 
+						s_ram_out when s_acc_ram_ld_src = '1' else
+					s_imm_gen; 
 
 		estado <= s_state;
 		pcAdrs <= s_PCOut;

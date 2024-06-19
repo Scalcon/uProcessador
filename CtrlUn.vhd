@@ -10,7 +10,7 @@ entity CtrlUn is
         immGen					: out unsigned(15 downto 0);
         regCode 				: out unsigned(2 downto 0);
 		jumpAdrs    			: out unsigned(6 downto 0);
-		acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src : out std_logic 
+		acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src, ram_wr_en, acc_ram_ld_src : out std_logic 
 
 	);
 end entity;
@@ -23,7 +23,6 @@ end entity;
 			constant SUB 	  : unsigned(3 downto 0) := "0101";
 			constant SUBI 	  : unsigned(3 downto 0) := "0100";
 			constant CMP      : unsigned(3 downto 0) := "0111";
-			constant CMPI     : unsigned(3 downto 0) := "0110";
 			constant AND_OP   : unsigned(3 downto 0) := "1000";
 			constant XOR_OP   : unsigned(3 downto 0) := "1100";
 			constant MV 	  : unsigned(3 downto 0) := "1010";
@@ -33,14 +32,15 @@ end entity;
 			constant BGE      : unsigned(3 downto 0) := "1001";
 			constant BLT      : unsigned(3 downto 0) := "1101";
  			constant JUMP 	  : unsigned(3 downto 0) := "1111";
+			constant WRAM     : unsigned(3 downto 0) := "0110";
 
 			-- signal declarations
 			signal s_opcode       : unsigned(3 downto 0) := "0000";
 			signal s_opUla 		: unsigned(1 downto 0) := "00";
 			signal s_immGen		: unsigned(15 downto 0) := "0000000000000000";
 			signal s_regCode   	: unsigned(2 downto 0) := "000";
-			signal s_jumpAdrs     : unsigned(6 downto 0) := "0000000";
-			signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, s_ula_carry, s_ula_equals : std_logic := '0';
+			signal s_jumpAdrs, s_ramAdrs     : unsigned(6 downto 0) := "0000000";
+			signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, s_ula_carry, s_ula_equals, s_ram_wr_en, s_acc_ram_ld_src : std_logic := '0';
 		
 	begin
 
@@ -55,11 +55,11 @@ end entity;
 											else
 					instruction(7 downto 5) when s_opcode = LD
 												or s_opcode = MV
+												or s_opcode = WRAM
 											else "000";
 
 
 		s_immGen <= ("0000000" & instruction(15 downto 7)) when s_opcode = SUBI
-												or s_opcode = CMPI
 											else
 					( "00000000" & instruction(15 downto 8)) when s_opcode = LD
 											else
@@ -68,7 +68,7 @@ end entity;
 																or s_opcode = BEQ
 																or s_opcode = BGE
 																or s_opcode = BLT
-											else "0000000000000000";
+											else "0000000000000000"; 
 
 					
 
@@ -78,7 +78,6 @@ end entity;
 				 "01" when s_opcode = SUB
 						or s_opcode = SUBI
 						or s_opcode = CMP
-						or s_opcode = CMPI
 					else
 				"10" when s_opcode = AND_OP
 					else
@@ -93,6 +92,7 @@ end entity;
 							or s_opcode = XOR_OP
 							or (s_opcode = LD and instruction(4) = '0')
 							or (s_opcode = MV and instruction(4) = '0')
+							or (s_opcode = WRAM and instruction(4) = '1')
 						else '0';
 		
 		s_rb_wr_en <= '1' when (s_opcode = LD and instruction(4) = '1')
@@ -106,6 +106,9 @@ end entity;
 								or (s_opcode = BEQ and ula_equals = '1')
 								or (s_opcode = BGE and ula_carry = '0')
 								or (s_opcode = BLT and ula_carry = '1')
+							else '0';
+
+		s_ram_wr_en <= '1' when (s_opcode = WRAM and instruction(4) = '0')
 							else '0';
 
 							
@@ -122,6 +125,10 @@ end entity;
 		
 		s_acc_ld_src <= '1' when (s_opcode = LD and instruction(4) = '0')
 							or (s_opcode = MV and instruction(4) = '0')
+							or (s_opcode = WRAM and instruction(4) = '1')
+						else '0';
+
+		s_acc_ram_ld_src <= '1' when (s_opcode = WRAM and instruction(4) = '1')
 						else '0';
 		
 		s_acc_mv_ld_src <= '1' when (s_opcode = MV and instruction(4) = '0')
@@ -147,5 +154,7 @@ end entity;
 		rb_wr_en <= s_rb_wr_en;
 		pc_jump_abs <= s_pc_jump_abs;
 		pc_jump_rel <= s_pc_jump_rel;
-		
+		ram_wr_en <= s_ram_wr_en;
+		acc_ram_ld_src <= s_acc_ram_ld_src;
+
 	end architecture a_CtrlUn;
