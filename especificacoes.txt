@@ -1,0 +1,14 @@
+Instruções OBRIGATÓRIAS a serem usadas na sua validação:
+{'ADD ctes': 'ADD apenas entre registradores',
+ 'ADD ops': 'ADD com dois operandos apenas',
+ 'Acumulador ou não': 'ULA com acumulador',
+ 'Carga de constantes': 'Carrega diretamente com LD sem somar',
+ 'Comparações': 'CMP presente',
+ 'Flags obrigatórias': ['Carry'],
+ 'SUB ctes': 'Há SUBI que pode subtrair com constante',
+ 'SUB ops': 'SUB com dois operandos apenas',
+ 'Saltos': 'Incondicional é absoluto e condicional é relativo',
+ 'Subtração': 'SUB sem borrow',
+ 'Validação -- complicações': 'Indicar, ao final, em debug_bit, se 28533 é '
+                              'primo ou não',
+ 'Validação -- final do loop': 'Detecção do MSB setado usando OR'}

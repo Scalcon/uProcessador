@@ -24,6 +24,7 @@ architecture a_PCcompleto of PCcompleto is
     
     -- Declaração de sinais
         signal endAtual, endProx : unsigned(6 downto 0) := "0000000";
+        signal writeEn : std_logic;
 
 begin
     

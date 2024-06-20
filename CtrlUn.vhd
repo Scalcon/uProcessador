@@ -24,7 +24,7 @@ end entity;
 			constant SUBI 	  : unsigned(3 downto 0) := "0100";
 			constant CMP      : unsigned(3 downto 0) := "0111";
 			constant AND_OP   : unsigned(3 downto 0) := "1000";
-			constant XOR_OP   : unsigned(3 downto 0) := "1100";
+			constant OR_OP    : unsigned(3 downto 0) := "1100";
 			constant MV 	  : unsigned(3 downto 0) := "1010";
 			constant LD 	  : unsigned(3 downto 0) := "1110";
 			constant BEQ      : unsigned(3 downto 0) := "1011";
@@ -51,7 +51,7 @@ end entity;
 												or s_opcode = SUB
 												or s_opcode = CMP
 												or s_opcode = AND_OP
-												or s_opcode = XOR_OP
+												or s_opcode = OR_OP
 											else
 					instruction(7 downto 5) when s_opcode = LD
 												or s_opcode = MV
@@ -81,7 +81,7 @@ end entity;
 					else
 				"10" when s_opcode = AND_OP
 					else
-				"11" when s_opcode = XOR_OP
+				"11" when s_opcode = OR_OP
 					else "00";
 				
 		-- write enablers
@@ -89,7 +89,7 @@ end entity;
 							or s_opcode = SUB
 							or s_opcode = SUBI
 							or s_opcode = AND_OP
-							or s_opcode = XOR_OP
+							or s_opcode = OR_OP
 							or (s_opcode = LD and instruction(4) = '0')
 							or (s_opcode = MV and instruction(4) = '0')
 							or (s_opcode = WRAM and instruction(4) = '1')
@@ -117,7 +117,7 @@ end entity;
 						or s_opcode = SUB
 						or s_opcode = CMP
 						or s_opcode = AND_OP
-						or s_opcode = XOR_OP
+						or s_opcode = OR_OP
 					else '1';
 		
 		s_rb_ld_src <= '1' when (s_opcode = LD and instruction(4) = '1')
@@ -139,7 +139,7 @@ end entity;
 												or (s_opcode = BNE and ula_equals = '0')
 												or (s_opcode = BEQ and ula_equals = '1')
 												or (s_opcode = BGE and ula_carry = '0' and ula_equals = '0')
-												or (s_opcode = BLT and ula_carry = '1')
+												or (s_opcode = BLT and ula_carry = '1' and ula_equals = '0')
 					else "0000000";
 
 		opUla <= s_opUla;

@@ -169,7 +169,7 @@ architecture a_uprocessador of uprocessador is
 		);
 
 		--write enablers com maquina de estados
-		s_wr_en <= '1' when s_state = "10" else '0';
+		s_wr_en <= '1' when s_state = "01" else '0';
 		s_sm_ram_wr_en <= s_ram_wr_en when s_state = "01" else '0';
 		s_sm_rb_wr_en <= s_rb_wr_en when s_state = "01" else '0';
 		s_sm_acc_wr_en <= s_acc_wr_en when s_state = "01" else '0';

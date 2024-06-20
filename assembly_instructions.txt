@@ -14,7 +14,7 @@ ADD   - 0001
 SUB   - 0101
 CMP   - 0111
 AND   - 1000
-XOR   - 1100
+OR   - 1100
 
 Operações na ULA com Constantes -> IIIIIIIII_RRR_CCCC
 I - CONSTANTE
@@ -33,12 +33,12 @@ OpCodes:
 LD    - 1_1110
 LDACC - 0_1110
 
-Operações de movimentação de dados -> XXXXXXXX_YYY_D_CCCC 
+Operações de movimentação de dados -> XXXXXXXX_RRR_D_CCCC 
 
 OpCodes:
 
-MV    - 1_1010
-MVACC - 0_1010
+MV    - 1_1010 (ACUMULADOR PARA REGISTRADOR)
+MVACC - 0_1010 (REGISTRADOR PARA ACUMULADOR)
 
 Operação de Salto -> XXXXX_IIIIIII_CCCC
 Para branches condicionais para endereços anteriores, constante vale:
