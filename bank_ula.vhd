@@ -7,9 +7,10 @@ entity bank_ula is
             reg_code                                         : in unsigned(2 downto 0);
             ula_op                                           : in unsigned(1 downto 0);
             constgen                                         : in unsigned(15 downto 0);
-            carry_out, equals_out                                : out std_logic;
+            carry_out, equals_out                            : out std_logic;
+            
             --debbug pins d_
-            d_acc_out, d_rb_out , d_ula_out                  : out unsigned(15 downto 0)
+            d_acc_out, d_rb_out , d_ula_out, d_r7_out        : out unsigned(15 downto 0)
     );
 end entity bank_ula;
 
@@ -29,7 +30,8 @@ architecture a_bank_ula of bank_ula is
         port (read1, wrt         : in unsigned(2 downto 0);
               data_in            : in unsigned(15 downto 0);
               clk, rst, wr_en    : in std_logic;
-              reg_out            : out unsigned(15 downto 0)
+              reg_out            : out unsigned(15 downto 0);
+              reg_out7           : out unsigned(15 downto 0)
         );
     end component;
 
@@ -41,7 +43,7 @@ architecture a_bank_ula of bank_ula is
     end component;
 
     signal ula_in, ula_out, rb_in, acc_in : unsigned(15 downto 0);
-    signal rb_out, acc_out        : unsigned(15 downto 0);
+    signal rb_out, acc_out, r7_out        : unsigned(15 downto 0);
     signal carry, equals                 : std_logic;
 
     begin
@@ -53,13 +55,14 @@ architecture a_bank_ula of bank_ula is
         acc_in <= constgen when acc_ld_src = '1' else ula_out;
 
         ula: ula0 port map(ula_in, acc_out, ula_op, ula_out, carry, equals);
-        rb: ban_reg port map(reg_code, reg_code, rb_in, clk, rst, rb_wr_en, rb_out);
+        rb: ban_reg port map(reg_code, reg_code, rb_in, clk, rst, rb_wr_en, rb_out, r7_out);
         acc: reg16bits port map(clk, rst, acc_wr_en, acc_in, acc_out);
 
         --outputs
         d_ula_out <= ula_out;
         d_rb_out <= rb_out;
         d_acc_out <= acc_out;
+        d_r7_out <= r7_out;
         carry_out <= carry;
         equals_out <= equals;
         

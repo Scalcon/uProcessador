@@ -1,25 +1,25 @@
 v 4
-file . "uprocessador.vhd" "fa30f876352b24821bbdac4562c460f554045095" "20240620201150.984":
-  entity uprocessador at 1( 0) + 0 on 159;
-  architecture a_uprocessador of uprocessador at 19( 412) + 0 on 160;
-file . "ROM.vhd" "4b4184926843895a4bd5f4608f82d504f77f05a8" "20240620201143.428":
-  entity rom at 1( 0) + 0 on 157;
-  architecture a_rom of rom at 12( 222) + 0 on 158;
+file . "uprocessador.vhd" "aea50b66da5cc7cd8e953cc8fd8f01a4b8466da8" "20240627131042.922":
+  entity uprocessador at 1( 0) + 0 on 187;
+  architecture a_uprocessador of uprocessador at 19( 420) + 0 on 188;
+file . "ROM.vhd" "7b4935ca5db4dc103b3dab4823b9fad7eca6da58" "20240627131032.166":
+  entity rom at 1( 0) + 0 on 185;
+  architecture a_rom of rom at 12( 222) + 0 on 186;
 file . "PCcompleto.vhd" "7065bf08c602bebde8f80bb3b97dbae4bfb99b2e" "20240620192006.713":
   entity pccompleto at 1( 0) + 0 on 129;
   architecture a_pccompleto of pccompleto at 13( 337) + 0 on 130;
-file . "bank_ula.vhd" "4312a466a8cd0c7e9ae4b7dd68027e7bbad80191" "20240620191939.018":
-  entity bank_ula at 1( 0) + 0 on 127;
-  architecture a_bank_ula of bank_ula at 16( 688) + 0 on 128;
-file . "ula0.vhd" "b7082f002a8cf488175ec9010c8c930754db94bb" "20240620191927.841":
-  entity ula0 at 2( 58) + 0 on 125;
-  architecture aula of ula0 at 16( 437) + 0 on 126;
+file . "bank_ula.vhd" "54dac501a0d99daf9ba8e3781a13f74c815f66fc" "20240627125922.232":
+  entity bank_ula at 1( 0) + 0 on 171;
+  architecture a_bank_ula of bank_ula at 17( 698) + 0 on 172;
+file . "ula0.vhd" "4bc5eba23505d2ef08fa85b431b1d6e3ddf4189e" "20240627125905.387":
+  entity ula0 at 2( 58) + 0 on 169;
+  architecture aula of ula0 at 16( 437) + 0 on 170;
 file . "reg16bits.vhd" "369e4eecad3a8b49c6d8a90ee008625aac0d0535" "20240619223628.842":
   entity reg16bits at 1( 0) + 0 on 17;
   architecture a_reg16bits of reg16bits at 12( 274) + 0 on 18;
-file . "ban_reg.vhd" "2c443a7c9db643ac804c995c799b3b3281f13154" "20240619223633.935":
-  entity ban_reg at 1( 0) + 0 on 19;
-  architecture a_ban_reg of ban_reg at 13( 340) + 0 on 20;
+file . "ban_reg.vhd" "31a0240b8e196b43a9ffdcfd27ae0cc51d90abe3" "20240627125848.439":
+  entity ban_reg at 1( 0) + 0 on 167;
+  architecture a_ban_reg of ban_reg at 14( 400) + 0 on 168;
 file . "ram.vhd" "44a69bba6f92da83248835f98e1dffe3f5889542" "20240619223215.558":
   entity ram at 1( 0) + 0 on 11;
   architecture a_ram of ram at 13( 301) + 0 on 12;
@@ -32,9 +32,9 @@ file . "PC.vhd" "3cc1e2f8d6f71c7a47f52e4072e43eb0e46fee6d" "20240620025846.572":
 file . "MaquinaEstados.vhd" "55f22150a15c238d3d5a437b444a66e438b3562b" "20240619223756.471":
   entity maquinaestados at 1( 0) + 0 on 31;
   architecture a_maquinaestados of maquinaestados at 12( 200) + 0 on 32;
-file . "CtrlUn.vhd" "ca60d9c3bba198f875648784d04d93158f8c911f" "20240620192057.289":
-  entity ctrlun at 1( 0) + 0 on 133;
-  architecture a_ctrlun of ctrlun at 18( 543) + 1 on 134;
-file . "uprocessador_tb.vhd" "9b883e65e6bcbd4efeff9007952ef9e928fdbac2" "20240620201201.678":
-  entity uprocessador_tb at 1( 0) + 0 on 161;
-  architecture a_uprocessador of uprocessador_tb at 8( 109) + 0 on 162;
+file . "CtrlUn.vhd" "d32d225c28823488f66c48efc62c4d758ff740d4" "20240627130109.957":
+  entity ctrlun at 1( 0) + 0 on 175;
+  architecture a_ctrlun of ctrlun at 21( 555) + 1 on 176;
+file . "uprocessador_tb.vhd" "e91e62198da12f942add1953b18f932a025b312e" "20240627131049.549":
+  entity uprocessador_tb at 1( 0) + 0 on 189;
+  architecture a_uprocessador of uprocessador_tb at 8( 109) + 0 on 190;

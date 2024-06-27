@@ -10,7 +10,10 @@ entity CtrlUn is
         immGen					: out unsigned(15 downto 0);
         regCode 				: out unsigned(2 downto 0);
 		jumpAdrs    			: out unsigned(6 downto 0);
-		acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src, ram_wr_en, acc_ram_ld_src : out std_logic 
+		
+		acc_wr_en, rb_wr_en, pc_jump_abs, pc_jump_rel, 
+		ula_src, rb_ld_src, acc_ld_src, acc_mv_ld_src, 
+		ram_wr_en, acc_ram_ld_src : out std_logic 
 
 	);
 end entity;
@@ -40,11 +43,13 @@ end entity;
 			signal s_immGen		: unsigned(15 downto 0) := "0000000000000000";
 			signal s_regCode   	: unsigned(2 downto 0) := "000";
 			signal s_jumpAdrs, s_ramAdrs     : unsigned(6 downto 0) := "0000000";
-			signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, s_ula_carry, s_ula_equals, s_ram_wr_en, s_acc_ram_ld_src : std_logic := '0';
+			signal  s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, 
+					s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, 
+			        s_ram_wr_en, s_acc_ram_ld_src : std_logic := '0';
 		
 	begin
 
-		-- extrai o opcode
+		-- INSTRUCTION MANIPULATION
 		s_opcode <= instruction(3 downto 0);
 
 		s_regcode <= instruction(6 downto 4) when s_opcode = ADD
@@ -72,7 +77,7 @@ end entity;
 
 					
 
-		-- ula ops
+		-- ULA OPS
 		s_opUla <= "00" when s_opcode = ADD
 					else
 				 "01" when s_opcode = SUB
@@ -84,7 +89,7 @@ end entity;
 				"11" when s_opcode = OR_OP
 					else "00";
 				
-		-- write enablers
+		-- WR_EN
 		s_acc_wr_en <= '1' when s_opcode = ADD
 							or s_opcode = SUB
 							or s_opcode = SUBI
@@ -112,7 +117,7 @@ end entity;
 							else '0';
 
 							
-		-- sources, 1 = constantes, 0 = registradores
+		-- SOURCES
 		s_ula_src <= '0' when s_opcode = ADD
 						or s_opcode = SUB
 						or s_opcode = CMP
@@ -123,14 +128,17 @@ end entity;
 		s_rb_ld_src <= '1' when (s_opcode = LD and instruction(4) = '1')
 						else '0';
 		
+		--mux pro acc
 		s_acc_ld_src <= '1' when (s_opcode = LD and instruction(4) = '0')
 							or (s_opcode = MV and instruction(4) = '0')
 							or (s_opcode = WRAM and instruction(4) = '1')
 						else '0';
-
+		
+		--mais um mux pra instrução LW
 		s_acc_ram_ld_src <= '1' when (s_opcode = WRAM and instruction(4) = '1')
 						else '0';
 		
+		--mv acc
 		s_acc_mv_ld_src <= '1' when (s_opcode = MV and instruction(4) = '0')
 						else '0';
 		

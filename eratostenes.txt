@@ -1,4 +1,5 @@
 ld r6, 31 (0001 1111)
+ld r4, 32 (0010 0000)
 ld r0 2
 ld a 2
 mv a r0
@@ -12,8 +13,8 @@ mov a r6
 or r0
 mv r5
 
-ld a, 0010 0000
-cmp r5
+mv a, r5
+cmp r4
 blt -7
 
 elimina todoe 2:
@@ -29,8 +30,8 @@ mov a r6
 or r1
 mv r5
 
-ld a, 0010 0000
-cmp r5
+mv a, r5
+cmp r4
 blt -8
 
 
@@ -46,8 +47,8 @@ sw r1
 mov a r6
 or r1
 mv r5
-ld a, 0010 0000
-cmp r5
+mv a, r5
+cmp r4
 
 blt -8
 
@@ -64,8 +65,8 @@ sw r1
 mov a r6
 or r1
 mv r5
-ld a, 0010 0000
-cmp r5
+mv a, r5
+cmp r4
 
 blt -8
 
@@ -82,8 +83,8 @@ sw r1
 mov a r6
 or r1
 mv r5
-ld a, 0010 0000
-cmp r5
+mv a, r5
+cmp r4
 
 blt -8
 
@@ -99,8 +100,8 @@ sw r1
 mov a r6
 or r1
 mv r5
-ld a, 0010 0000
-cmp r5
+mv a, r5
+cmp r4
 
 blt -8
 
@@ -112,8 +113,8 @@ add r0
 mov r0
 lw r0
 mov r7
-ld a 0010 0000
-cmp r0
+mv a, r5
+cmp r4
 blt -8
 
         0 => "00011111_101_1_1110",

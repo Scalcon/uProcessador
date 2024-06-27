@@ -6,7 +6,8 @@ entity ban_reg is
     port ( read1, wrt         : in unsigned(2 downto 0);
            data_in            : in unsigned(15 downto 0);
            clk, rst, wr_en    : in std_logic;
-           reg_out            : out unsigned(15 downto 0)
+           reg_out            : out unsigned(15 downto 0);
+           reg_out7           : out unsigned(15 downto 0)
     );
 end ban_reg;
 
@@ -15,7 +16,7 @@ architecture a_ban_reg of ban_reg is
       port ( clk, rst, wr_en : in std_logic;
              data_in         : in unsigned(15 downto 0);
              data_out        : out unsigned(15 downto 0)
-           );
+       );
     end component;  
 
     signal zero, reg1, reg2, reg3, reg4, reg5, reg6, reg7 : unsigned(15 downto 0);
@@ -40,14 +41,15 @@ begin
     register6: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en6, data_in => data_in, data_out => reg6);
     register7: reg16bits port map(clk => clk, rst => rst, wr_en => wr_en7, data_in => data_in, data_out => reg7);
 
-    reg_out <=  zero when read1 = "000" else
-                reg1 when read1 = "001" else
-                reg2 when read1 = "010" else
-                reg3 when read1 = "011" else
-                reg4 when read1 = "100" else
-                reg5 when read1 = "101" else
-                reg6 when read1 = "110" else
-                reg7 when read1 = "111" else
-                "0000000000000000";
-        
+       reg_out <=  zero when read1 = "000" else
+                   reg1 when read1 = "001" else
+                   reg2 when read1 = "010" else
+                   reg3 when read1 = "011" else
+                   reg4 when read1 = "100" else
+                   reg5 when read1 = "101" else
+                   reg6 when read1 = "110" else
+                   reg7 when read1 = "111" else
+                   "0000000000000000";
+       reg_out7 <= reg7;
+
 end a_ban_reg;

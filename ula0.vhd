@@ -20,7 +20,7 @@ architecture aUla of ula0 is
     begin
 
         sum_sub_ops <= "0" & in1 + in2 when selec_op = "00" else
-                   "0" & in1 - in2 when selec_op = "01" else
+                   "0" & in2 - in1 when selec_op = "01" else
         "00000000000000000";
  
         out_res <= sum_sub_ops(15 downto 0) when selec_op = "00" or selec_op = "01" else
