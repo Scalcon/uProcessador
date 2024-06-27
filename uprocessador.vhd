@@ -81,7 +81,7 @@ architecture a_uprocessador of uprocessador is
 			   data_out   : out unsigned(15 downto 0)
  		);	
 	end component;
-
+	--desculpa professor
 	signal s_acc_wr_en, s_rb_wr_en, s_pc_jump_abs, s_pc_jump_rel, s_ula_src, s_rb_ld_src, s_acc_ld_src, s_acc_mv_ld_src, s_carry, s_equals : std_logic := '0'; 
 	signal s_wr_en, s_sm_rb_wr_en, s_sm_acc_wr_en, s_ff_carry, s_ff_uc_wr_en, s_ram_wr_en, s_acc_ram_ld_src, s_sm_ram_wr_en, s_ff_equals : std_logic := '0';
 	signal s_ulaOp, s_state : unsigned(1 downto 0) := "00";

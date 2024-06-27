@@ -1,10 +1,10 @@
 v 4
-file . "uprocessador.vhd" "aea50b66da5cc7cd8e953cc8fd8f01a4b8466da8" "20240627131042.922":
-  entity uprocessador at 1( 0) + 0 on 187;
-  architecture a_uprocessador of uprocessador at 19( 420) + 0 on 188;
-file . "ROM.vhd" "7b4935ca5db4dc103b3dab4823b9fad7eca6da58" "20240627131032.166":
-  entity rom at 1( 0) + 0 on 185;
-  architecture a_rom of rom at 12( 222) + 0 on 186;
+file . "uprocessador.vhd" "fce3bc0c4c989638aa07a4235dddf603a164c3b2" "20240627172700.592":
+  entity uprocessador at 1( 0) + 0 on 225;
+  architecture a_uprocessador of uprocessador at 19( 420) + 0 on 226;
+file . "ROM.vhd" "7edef8079c3af4fa7197289352ef7436b1f6dcc6" "20240627172654.885":
+  entity rom at 1( 0) + 0 on 223;
+  architecture a_rom of rom at 12( 222) + 0 on 224;
 file . "PCcompleto.vhd" "7065bf08c602bebde8f80bb3b97dbae4bfb99b2e" "20240620192006.713":
   entity pccompleto at 1( 0) + 0 on 129;
   architecture a_pccompleto of pccompleto at 13( 337) + 0 on 130;
@@ -35,6 +35,6 @@ file . "MaquinaEstados.vhd" "55f22150a15c238d3d5a437b444a66e438b3562b" "20240619
 file . "CtrlUn.vhd" "d32d225c28823488f66c48efc62c4d758ff740d4" "20240627130109.957":
   entity ctrlun at 1( 0) + 0 on 175;
   architecture a_ctrlun of ctrlun at 21( 555) + 1 on 176;
-file . "uprocessador_tb.vhd" "e91e62198da12f942add1953b18f932a025b312e" "20240627131049.549":
-  entity uprocessador_tb at 1( 0) + 0 on 189;
-  architecture a_uprocessador of uprocessador_tb at 8( 109) + 0 on 190;
+file . "uprocessador_tb.vhd" "e91e62198da12f942add1953b18f932a025b312e" "20240627172759.434":
+  entity uprocessador_tb at 1( 0) + 0 on 229;
+  architecture a_uprocessador of uprocessador_tb at 8( 109) + 0 on 230;

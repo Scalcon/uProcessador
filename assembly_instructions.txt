@@ -16,7 +16,7 @@ CMP   - 0111
 AND   - 1000
 OR   - 1100
 
-Operações na ULA com Constantes -> IIIIIIIII_RRR_CCCC
+Operações na ULA com Constantes -> IIIIIIIII_XXX_CCCC
 I - CONSTANTE
 
 OpCodes:

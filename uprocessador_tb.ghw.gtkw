@@ -1,26 +1,25 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Thu Jun 20 20:00:52 2024
+[*] Thu Jun 27 17:19:38 2024
 [*]
 [dumpfile] "C:\Users\pedro\OneDrive\Área de Trabalho\faculdade poggers\uProcessador\uprocessador_tb.ghw"
-[dumpfile_mtime] "Thu Jun 20 20:00:08 2024"
-[dumpfile_size] 531229
+[dumpfile_mtime] "Thu Jun 27 17:19:03 2024"
+[dumpfile_size] 22109
 [savefile] "C:\Users\pedro\OneDrive\Área de Trabalho\faculdade poggers\uProcessador\uprocessador_tb.ghw.gtkw"
-[timestart] 226910000000
-[size] 1536 793
+[timestart] 0
+[size] 1920 1009
 [pos] -113 -113
-*-31.681480 4850000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-30.352951 4850000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.uprocessador_tb.
 [treeopen] top.uprocessador_tb.uut.
 [treeopen] top.uprocessador_tb.uut.bula.
 [treeopen] top.uprocessador_tb.uut.bula.rb.
 [treeopen] top.uprocessador_tb.uut.ram0.
-[treeopen] top.uprocessador_tb.uut.ram0.content_ram.
 [sst_width] 197
 [signals_width] 198
 [sst_expanded] 1
-[sst_vpaned_height] 297
+[sst_vpaned_height] 577
 @28
 top.uprocessador_tb.clk
 #{top.uprocessador_tb.estado[1:0]} top.uprocessador_tb.estado[1] top.uprocessador_tb.estado[0]
@@ -51,13 +50,15 @@ top.uprocessador_tb.uut.bula.rb_wr_en
 #{top.uprocessador_tb.uut.ram0.content_ram[12][15:0]} top.uprocessador_tb.uut.ram0.content_ram[12][15] top.uprocessador_tb.uut.ram0.content_ram[12][14] top.uprocessador_tb.uut.ram0.content_ram[12][13] top.uprocessador_tb.uut.ram0.content_ram[12][12] top.uprocessador_tb.uut.ram0.content_ram[12][11] top.uprocessador_tb.uut.ram0.content_ram[12][10] top.uprocessador_tb.uut.ram0.content_ram[12][9] top.uprocessador_tb.uut.ram0.content_ram[12][8] top.uprocessador_tb.uut.ram0.content_ram[12][7] top.uprocessador_tb.uut.ram0.content_ram[12][6] top.uprocessador_tb.uut.ram0.content_ram[12][5] top.uprocessador_tb.uut.ram0.content_ram[12][4] top.uprocessador_tb.uut.ram0.content_ram[12][3] top.uprocessador_tb.uut.ram0.content_ram[12][2] top.uprocessador_tb.uut.ram0.content_ram[12][1] top.uprocessador_tb.uut.ram0.content_ram[12][0]
 #{top.uprocessador_tb.uut.ram0.content_ram[13][15:0]} top.uprocessador_tb.uut.ram0.content_ram[13][15] top.uprocessador_tb.uut.ram0.content_ram[13][14] top.uprocessador_tb.uut.ram0.content_ram[13][13] top.uprocessador_tb.uut.ram0.content_ram[13][12] top.uprocessador_tb.uut.ram0.content_ram[13][11] top.uprocessador_tb.uut.ram0.content_ram[13][10] top.uprocessador_tb.uut.ram0.content_ram[13][9] top.uprocessador_tb.uut.ram0.content_ram[13][8] top.uprocessador_tb.uut.ram0.content_ram[13][7] top.uprocessador_tb.uut.ram0.content_ram[13][6] top.uprocessador_tb.uut.ram0.content_ram[13][5] top.uprocessador_tb.uut.ram0.content_ram[13][4] top.uprocessador_tb.uut.ram0.content_ram[13][3] top.uprocessador_tb.uut.ram0.content_ram[13][2] top.uprocessador_tb.uut.ram0.content_ram[13][1] top.uprocessador_tb.uut.ram0.content_ram[13][0]
 #{top.uprocessador_tb.uut.ram0.content_ram[27][15:0]} top.uprocessador_tb.uut.ram0.content_ram[27][15] top.uprocessador_tb.uut.ram0.content_ram[27][14] top.uprocessador_tb.uut.ram0.content_ram[27][13] top.uprocessador_tb.uut.ram0.content_ram[27][12] top.uprocessador_tb.uut.ram0.content_ram[27][11] top.uprocessador_tb.uut.ram0.content_ram[27][10] top.uprocessador_tb.uut.ram0.content_ram[27][9] top.uprocessador_tb.uut.ram0.content_ram[27][8] top.uprocessador_tb.uut.ram0.content_ram[27][7] top.uprocessador_tb.uut.ram0.content_ram[27][6] top.uprocessador_tb.uut.ram0.content_ram[27][5] top.uprocessador_tb.uut.ram0.content_ram[27][4] top.uprocessador_tb.uut.ram0.content_ram[27][3] top.uprocessador_tb.uut.ram0.content_ram[27][2] top.uprocessador_tb.uut.ram0.content_ram[27][1] top.uprocessador_tb.uut.ram0.content_ram[27][0]
-@23
 #{top.uprocessador_tb.uut.ram0.content_ram[30][15:0]} top.uprocessador_tb.uut.ram0.content_ram[30][15] top.uprocessador_tb.uut.ram0.content_ram[30][14] top.uprocessador_tb.uut.ram0.content_ram[30][13] top.uprocessador_tb.uut.ram0.content_ram[30][12] top.uprocessador_tb.uut.ram0.content_ram[30][11] top.uprocessador_tb.uut.ram0.content_ram[30][10] top.uprocessador_tb.uut.ram0.content_ram[30][9] top.uprocessador_tb.uut.ram0.content_ram[30][8] top.uprocessador_tb.uut.ram0.content_ram[30][7] top.uprocessador_tb.uut.ram0.content_ram[30][6] top.uprocessador_tb.uut.ram0.content_ram[30][5] top.uprocessador_tb.uut.ram0.content_ram[30][4] top.uprocessador_tb.uut.ram0.content_ram[30][3] top.uprocessador_tb.uut.ram0.content_ram[30][2] top.uprocessador_tb.uut.ram0.content_ram[30][1] top.uprocessador_tb.uut.ram0.content_ram[30][0]
 @24
 #{top.uprocessador_tb.uut.bula.rb.reg6[15:0]} top.uprocessador_tb.uut.bula.rb.reg6[15] top.uprocessador_tb.uut.bula.rb.reg6[14] top.uprocessador_tb.uut.bula.rb.reg6[13] top.uprocessador_tb.uut.bula.rb.reg6[12] top.uprocessador_tb.uut.bula.rb.reg6[11] top.uprocessador_tb.uut.bula.rb.reg6[10] top.uprocessador_tb.uut.bula.rb.reg6[9] top.uprocessador_tb.uut.bula.rb.reg6[8] top.uprocessador_tb.uut.bula.rb.reg6[7] top.uprocessador_tb.uut.bula.rb.reg6[6] top.uprocessador_tb.uut.bula.rb.reg6[5] top.uprocessador_tb.uut.bula.rb.reg6[4] top.uprocessador_tb.uut.bula.rb.reg6[3] top.uprocessador_tb.uut.bula.rb.reg6[2] top.uprocessador_tb.uut.bula.rb.reg6[1] top.uprocessador_tb.uut.bula.rb.reg6[0]
 #{top.uprocessador_tb.uut.bula.rb.reg5[15:0]} top.uprocessador_tb.uut.bula.rb.reg5[15] top.uprocessador_tb.uut.bula.rb.reg5[14] top.uprocessador_tb.uut.bula.rb.reg5[13] top.uprocessador_tb.uut.bula.rb.reg5[12] top.uprocessador_tb.uut.bula.rb.reg5[11] top.uprocessador_tb.uut.bula.rb.reg5[10] top.uprocessador_tb.uut.bula.rb.reg5[9] top.uprocessador_tb.uut.bula.rb.reg5[8] top.uprocessador_tb.uut.bula.rb.reg5[7] top.uprocessador_tb.uut.bula.rb.reg5[6] top.uprocessador_tb.uut.bula.rb.reg5[5] top.uprocessador_tb.uut.bula.rb.reg5[4] top.uprocessador_tb.uut.bula.rb.reg5[3] top.uprocessador_tb.uut.bula.rb.reg5[2] top.uprocessador_tb.uut.bula.rb.reg5[1] top.uprocessador_tb.uut.bula.rb.reg5[0]
 @22
 #{top.uprocessador_tb.uut.bula.rb.zero[15:0]} top.uprocessador_tb.uut.bula.rb.zero[15] top.uprocessador_tb.uut.bula.rb.zero[14] top.uprocessador_tb.uut.bula.rb.zero[13] top.uprocessador_tb.uut.bula.rb.zero[12] top.uprocessador_tb.uut.bula.rb.zero[11] top.uprocessador_tb.uut.bula.rb.zero[10] top.uprocessador_tb.uut.bula.rb.zero[9] top.uprocessador_tb.uut.bula.rb.zero[8] top.uprocessador_tb.uut.bula.rb.zero[7] top.uprocessador_tb.uut.bula.rb.zero[6] top.uprocessador_tb.uut.bula.rb.zero[5] top.uprocessador_tb.uut.bula.rb.zero[4] top.uprocessador_tb.uut.bula.rb.zero[3] top.uprocessador_tb.uut.bula.rb.zero[2] top.uprocessador_tb.uut.bula.rb.zero[1] top.uprocessador_tb.uut.bula.rb.zero[0]
+@23
+#{top.uprocessador_tb.uut.bula.rb.reg7[15:0]} top.uprocessador_tb.uut.bula.rb.reg7[15] top.uprocessador_tb.uut.bula.rb.reg7[14] top.uprocessador_tb.uut.bula.rb.reg7[13] top.uprocessador_tb.uut.bula.rb.reg7[12] top.uprocessador_tb.uut.bula.rb.reg7[11] top.uprocessador_tb.uut.bula.rb.reg7[10] top.uprocessador_tb.uut.bula.rb.reg7[9] top.uprocessador_tb.uut.bula.rb.reg7[8] top.uprocessador_tb.uut.bula.rb.reg7[7] top.uprocessador_tb.uut.bula.rb.reg7[6] top.uprocessador_tb.uut.bula.rb.reg7[5] top.uprocessador_tb.uut.bula.rb.reg7[4] top.uprocessador_tb.uut.bula.rb.reg7[3] top.uprocessador_tb.uut.bula.rb.reg7[2] top.uprocessador_tb.uut.bula.rb.reg7[1] top.uprocessador_tb.uut.bula.rb.reg7[0]
+@22
 #{top.uprocessador_tb.instrucao[15:0]} top.uprocessador_tb.instrucao[15] top.uprocessador_tb.instrucao[14] top.uprocessador_tb.instrucao[13] top.uprocessador_tb.instrucao[12] top.uprocessador_tb.instrucao[11] top.uprocessador_tb.instrucao[10] top.uprocessador_tb.instrucao[9] top.uprocessador_tb.instrucao[8] top.uprocessador_tb.instrucao[7] top.uprocessador_tb.instrucao[6] top.uprocessador_tb.instrucao[5] top.uprocessador_tb.instrucao[4] top.uprocessador_tb.instrucao[3] top.uprocessador_tb.instrucao[2] top.uprocessador_tb.instrucao[1] top.uprocessador_tb.instrucao[0]
 #{top.uprocessador_tb.pcadrs[6:0]} top.uprocessador_tb.pcadrs[6] top.uprocessador_tb.pcadrs[5] top.uprocessador_tb.pcadrs[4] top.uprocessador_tb.pcadrs[3] top.uprocessador_tb.pcadrs[2] top.uprocessador_tb.pcadrs[1] top.uprocessador_tb.pcadrs[0]
 [pattern_trace] 1
